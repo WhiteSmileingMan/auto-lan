@@ -55,17 +55,13 @@ public class LanSettings {
     }
 
     public static LanSettings fromNbt(NbtCompound nbt) {
-        LanSettings lanSettings = systemDefaults(GameMode.byIndex(nbt.getInt("gameMode").get()));
-        nbt.getBoolean("onlineMode").ifPresent(onlineMode -> lanSettings.onlineMode = onlineMode);
-        nbt.getString("tunnel").ifPresent(tunnel -> lanSettings.tunnel = TunnelType.valueOf(tunnel));
-        nbt.getInt("port").ifPresent(port -> lanSettings.port = port);
-        nbt.getInt("maxPlayers").ifPresent(maxPlayers -> lanSettings.maxPlayers = maxPlayers);
-        nbt.getString("motd").ifPresent(motd -> lanSettings.motd = motd);
-        return lanSettings;
+        return new LanSettings(GameMode.byId(nbt.getInt("gameMode")), nbt.getBoolean("onlineMode")
+               , TunnelType.valueOf(nbt.getString("tunnel")), nbt.getInt("port"),
+                nbt.getInt("maxPlayers"), nbt.getString("motd"));
     }
 
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putInt("gameMode", gameMode.getIndex());
+        nbt.putInt("gameMode", gameMode.getId());
         nbt.putBoolean("onlineMode", onlineMode);
         nbt.putString("tunnel", tunnel.name());
         nbt.putInt("port", port);

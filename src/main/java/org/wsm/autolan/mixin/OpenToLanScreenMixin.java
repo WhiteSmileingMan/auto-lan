@@ -152,7 +152,7 @@ public abstract class OpenToLanScreenMixin extends Screen {
         // this.client wouldn't have been initialized yet.
         if (!this.initialized) {
             this.autoLanState = server.getOverworld().getPersistentStateManager()
-                    .getOrCreate(AutoLanState.STATE_TYPE);
+                    .getOrCreate(autoLanState.getPersistentStateType(), autoLanState.AUTO_LAN_KEY);
 
             if (server.isRemote()) {
                 AutoLanServerValues serverValues = (AutoLanServerValues) server;

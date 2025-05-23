@@ -1,7 +1,5 @@
 package org.wsm.autolan.util;
 
-import java.net.URI;
-
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -10,8 +8,8 @@ public final class Utils {
     private Utils() {
     }
 
-    public static Text createLink(URI uri) {
-        return Text.literal(uri.toString()).styled(style -> style.withFormatting(Formatting.BLUE, Formatting.UNDERLINE)
-                .withClickEvent(new ClickEvent.OpenUrl(uri)));
+    public static Text createLink(String url) {
+        return Text.literal(url).styled(style -> style.withFormatting(Formatting.BLUE, Formatting.UNDERLINE)
+                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
     }
 }

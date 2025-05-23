@@ -105,7 +105,8 @@ public class PublishCommandMixin {
                                         }
                                         AutoLanState autoLanState = server.getOverworld()
                                                         .getPersistentStateManager()
-                                                        .getOrCreate(AutoLanState.STATE_TYPE);
+                                                .getOrCreate(AutoLanState.getPersistentStateType(),
+                                                        AutoLanState.AUTO_LAN_KEY);
                                         if (autoLanState.getLanSettings() != null) {
                                                 return autoLanState.getLanSettings();
                                         } else if (AutoLan.CONFIG.getConfig().lanSettings != null) {
@@ -116,10 +117,12 @@ public class PublishCommandMixin {
                                 .then(processThisAndArguments(literal("perworld"),
                                                 new PublishCommandArgumentValues(
                                                                 context -> context.getSource().getServer()
-                                                                                .getOverworld()
-                                                                                .getPersistentStateManager()
-                                                                                .getOrCreate(AutoLanState.STATE_TYPE)
-                                                                                .getLanSettings()),
+                                                                        .getOverworld()
+                                                                        .getPersistentStateManager()
+                                                                        .getOrCreate(AutoLanState
+                                                                                        .getPersistentStateType(),
+                                                                                AutoLanState.AUTO_LAN_KEY)
+                                                                        .getLanSettings()),
                                                 executeCommand, arguments.iterator()))
                                 .then(processThisAndArguments(literal("global"),
                                                 new PublishCommandArgumentValues(

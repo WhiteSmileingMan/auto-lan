@@ -1,6 +1,7 @@
 package org.wsm.autolan;
 
 import java.net.URI;
+import java.net.URL;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -25,8 +26,7 @@ public enum TunnelType implements StringIdentifiable {
             String authtoken = AutoLan.CONFIG.getConfig().ngrokAuthtoken.strip();
             if (authtoken.isEmpty()) {
                 throw new TunnelException(ScreenTexts.composeGenericOptionText(NGROK_FAILED,
-                        Text.translatable(NGROK_FAILED_NO_AUTHTOKEN,
-                                Utils.createLink(URI.create(NGROK_AUTHTOKEN_URL)))));
+                        Text.translatable(NGROK_FAILED_NO_AUTHTOKEN, Utils.createLink(NGROK_AUTHTOKEN_URL))));
             }
 
             try {
